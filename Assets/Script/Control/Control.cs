@@ -5,13 +5,11 @@ using UnityEngine;
 public class Control : MonoBehaviour
 {
     // Start is called before the first frame update
+    public Animator animator;
 
 
 
-    void Start()
-    {
-        
-    }
+   
 
     // Update is called once per frame
     void Update()
@@ -26,6 +24,18 @@ public class Control : MonoBehaviour
         {
             if (transform.position.x >= 1.0f) return;
             transform.position += new Vector3(1.5f, 0, 0);
+        }
+
+    }
+
+    //충돌한 물체에 대한 충돌
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.tag =="Obstacle")
+        {
+            GameManager.instance.speed = 0;
+            animator.SetTrigger("Death");
+            
         }
     }
 
